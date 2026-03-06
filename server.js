@@ -1,23 +1,40 @@
 const http = require('http');
 
 const PORT = process.env.PORT || 8080;
-const VERSION = process.env.APP_VERSION || '1.0.0';
+const VERSION = '2.0.0';
+const START_TIME = new Date().toISOString();
 
 const server = http.createServer((req, res) => {
   if (req.url === '/health') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ status: 'ok', version: VERSION }));
+    res.end(JSON.stringify({ status: 'ok', version: VERSION, uptime: process.uptime() }));
+    return;
+  }
+
+  if (req.url === '/api/info') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({
+      version: VERSION,
+      startedAt: START_TIME,
+      uptime: Math.floor(process.uptime()),
+      node: process.version,
+      memory: Math.round(process.memoryUsage().rss / 1024 / 1024) + 'MB',
+    }));
     return;
   }
 
   res.writeHead(200, { 'Content-Type': 'text/html' });
   res.end(`
     <html>
-      <body style="font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background: #1a1a2e; color: #e0e0e0;">
-        <div style="text-align: center;">
-          <h1>Push Deploy Test</h1>
-          <p>Version: <strong>${VERSION}</strong></p>
-          <p>Server time: ${new Date().toISOString()}</p>
+      <head><title>Push Deploy</title></head>
+      <body style="font-family: -apple-system, sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); color: #e0e0e0;">
+        <div style="text-align: center; padding: 2rem; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; backdrop-filter: blur(10px); background: rgba(255,255,255,0.05);">
+          <h1 style="margin: 0 0 0.5rem 0; font-size: 2rem;">Push Deploy</h1>
+          <p style="color: #8b8ba7; margin: 0.25rem 0;">v${VERSION}</p>
+          <hr style="border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 1rem 0;" />
+          <p>Server time: <strong>${new Date().toISOString()}</strong></p>
+          <p>Uptime: <strong>${Math.floor(process.uptime())}s</strong></p>
+          <p style="margin-top: 1rem;"><a href="/api/info" style="color: #7c7cf5; text-decoration: none;">GET /api/info</a></p>
         </div>
       </body>
     </html>
@@ -25,11 +42,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Push Deploy v${VERSION} running on port ${PORT}`);
 });
-// trigger build 1772772510
-// trigger build 1772772701
-// trigger build 1772772764
-// trigger build 1772772866
-// trigger build 1772773312
-// trigger build 1772773403
