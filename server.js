@@ -66,7 +66,7 @@ const server = http.createServer((req, res) => {
       <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); color: #e0e0e0;">
         <div style="text-align: center; padding: 2.5rem; border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; backdrop-filter: blur(10px); background: rgba(255,255,255,0.04); min-width: 320px; box-shadow: 0 8px 32px rgba(0,0,0,0.3);">
           <div style="font-size: 2.5rem; margin-bottom: 0.25rem;">&#x1f680;</div>
-          <h1 style="margin: 0 0 0.25rem 0; font-size: 1.75rem; font-weight: 600;">hell from opsnorth</h1>
+          <h1 style="margin: 0 0 0.25rem 0; font-size: 1.75rem; font-weight: 600;">hello from opsnorth</h1>
           <p style="color: #6e6e8a; margin: 0; font-size: 0.85rem;">v${VERSION} &middot; ${os.hostname()}</p>
           <hr style="border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 1.25rem 0;" />
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; text-align: left; font-size: 0.9rem;">
