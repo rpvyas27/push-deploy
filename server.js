@@ -2,7 +2,7 @@ const http = require('http');
 const os = require('os');
 
 const PORT = process.env.PORT || 8080;
-const VERSION = '3.0.0';
+const VERSION = '3.1.0';
 const START_TIME = new Date().toISOString();
 let requestCount = 0;
 
